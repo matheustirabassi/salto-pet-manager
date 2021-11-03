@@ -13,13 +13,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Tutor implements Serializable {
+public class BatherGroomer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -30,21 +28,17 @@ public class Tutor implements Serializable {
 	private String gender;
 
 	@ElementCollection
-	@CollectionTable(name = "cellphone")
+	@CollectionTable(name = "batherGroomerCellphone")
 	private Set<String> cellphones = new HashSet<>();
 
-	@JsonManagedReference
-	@OneToOne(mappedBy = "tutor")
-	private Login login;
-
 	@JsonIgnore
-	@OneToMany(mappedBy = "tutor")
-	private List<Scheduling> schedulings = new ArrayList<>();
+	@OneToMany(mappedBy = "batherGroomer")
+	private List<Scheduling> customerServices = new ArrayList<>();
 
-	public Tutor() {
+	public BatherGroomer() {
 	}
 
-	public Tutor(Long cpf, String name, String email, Date birthDate, String gender) {
+	public BatherGroomer(Long cpf, String name, String email, Date birthDate, String gender) {
 		this.cpf = cpf;
 		this.name = name;
 		this.email = email;
@@ -100,20 +94,12 @@ public class Tutor implements Serializable {
 		this.cellphones = cellphones;
 	}
 
-	public Login getLogin() {
-		return login;
+	public List<Scheduling> getCustomerServices() {
+		return customerServices;
 	}
 
-	public void setLogin(Login login) {
-		this.login = login;
-	}
-
-	public List<Scheduling> getSchedulings() {
-		return schedulings;
-	}
-
-	public void setSchedulings(List<Scheduling> schedulings) {
-		this.schedulings = schedulings;
+	public void setCustomerServices(List<Scheduling> customerServices) {
+		this.customerServices = customerServices;
 	}
 
 	@Override
@@ -129,7 +115,7 @@ public class Tutor implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tutor other = (Tutor) obj;
+		BatherGroomer other = (BatherGroomer) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
 

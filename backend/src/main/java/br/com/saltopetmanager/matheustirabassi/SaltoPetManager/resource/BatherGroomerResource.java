@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Login;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services.LoginService;
+import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.BatherGroomer;
+import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services.BatherGroomerService;
 
 @RestController
-@RequestMapping(value = "/logins")
-public class LoginResource {
+@RequestMapping(value = "/bathergroomers")
+public class BatherGroomerResource {
 	@Autowired
-	private LoginService service;
+	private BatherGroomerService service;
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Login obj = service.find(id);
+	public ResponseEntity<?> find(@PathVariable Long id) {
+		BatherGroomer obj = service.find(id);
 
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> findAll() {
-		List<Login> list = service.findAll();
+		List<BatherGroomer> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 }

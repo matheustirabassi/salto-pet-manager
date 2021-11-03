@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Scheduling;
 
 @Repository
-public interface SchedulingRepository extends JpaRepository<Scheduling, Integer>{
+public interface SchedulingRepository extends JpaRepository<Scheduling, Integer> {
 }

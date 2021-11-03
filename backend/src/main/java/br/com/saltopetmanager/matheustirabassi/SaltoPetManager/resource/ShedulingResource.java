@@ -24,6 +24,7 @@ public class ShedulingResource {
 
 		return ResponseEntity.ok().body(obj);
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> findAll() {
 		List<Scheduling> list = service.findAll();

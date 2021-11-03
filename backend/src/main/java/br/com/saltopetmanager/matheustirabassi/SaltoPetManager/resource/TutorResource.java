@@ -15,11 +15,11 @@ import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services.TutorSer
 public class TutorResource {
 	@Autowired
 	private TutorService service;
-	
+
 	@RequestMapping(value = "{cpf}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Long cpf){
+	public ResponseEntity<?> find(@PathVariable Long cpf) {
 		Tutor obj = service.find(cpf);
-		
+
 		return ResponseEntity.ok().body(obj);
 	}
 }
