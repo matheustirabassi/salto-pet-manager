@@ -1,27 +1,25 @@
 package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.resource;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Tutor;
+import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services.TutorService;
 
 @RestController
 @RequestMapping(value = "/tutors")
 public class TutorResource {
-
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Tutor> list() throws NumberFormatException, ParseException {
-		List<Tutor> tutors = new ArrayList<>();
-		Tutor tutor1 = new Tutor(Long.parseLong("48386036818"), "Matheus", 
-				"tirabassi.matheus@aluno.ifsp.edu.br", new SimpleDateFormat("dd/MM/yyyy").parse("16/04/2000"), "M");
-		tutors.add(tutor1);
+	@Autowired
+	private TutorService service;
+	
+	@RequestMapping(value = "{cpf}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Long cpf){
+		Tutor obj = service.find(cpf);
 		
-		return tutors;
+		return ResponseEntity.ok().body(obj);
 	}
 }
