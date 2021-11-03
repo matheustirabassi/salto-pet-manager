@@ -2,24 +2,36 @@ package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Tutor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cpf;
 	private String name;
 	private String email;
 	private Date birthDate;
 	private String gender;
+	
+	@ElementCollection
+	@CollectionTable(name = "cellphone")
+	private Set<String> cellphones = new HashSet<>();
+	
+	@JsonManagedReference
+	@OneToOne(mappedBy = "tutor")
+	private Login login;
 	
 	public Tutor() {
 	}
@@ -61,6 +73,19 @@ public class Tutor implements Serializable{
 		this.gender = gender;
 	}
 	
+	public Set<String> getCellphones() {
+		return cellphones;
+	}
+	public void setCellphones(Set<String> cellphones) {
+		this.cellphones = cellphones;
+	}
+	
+	public Login getLogin() {
+		return login;
+	}
+	public void setLogin(Login login) {
+		this.login = login;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);
