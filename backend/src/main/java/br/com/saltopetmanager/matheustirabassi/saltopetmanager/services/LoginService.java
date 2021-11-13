@@ -1,4 +1,4 @@
-package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services;
+package br.com.saltopetmanager.matheustirabassi.saltopetmanager.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Login;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.LoginRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Login;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.LoginRepository;
 
 @Service
 public class LoginService {
@@ -21,7 +21,6 @@ public class LoginService {
 	}
 
 	public List<Login> findAll() {
-		List<Login> obj = repo.findAll();
-		return obj;
+		return repo.findAll();
 	}
 }

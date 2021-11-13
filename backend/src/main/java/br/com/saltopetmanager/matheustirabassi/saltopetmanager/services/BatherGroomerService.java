@@ -1,4 +1,4 @@
-package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.services;
+package br.com.saltopetmanager.matheustirabassi.saltopetmanager.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.BatherGroomer;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.BatherGroomerRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.BatherGroomer;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.BatherGroomerRepository;
 
 @Service
 public class BatherGroomerService {
@@ -21,7 +21,6 @@ public class BatherGroomerService {
 	}
 
 	public List<BatherGroomer> findAll() {
-		List<BatherGroomer> obj = repo.findAll();
-		return obj;
+		return repo.findAll();
 	}
 }

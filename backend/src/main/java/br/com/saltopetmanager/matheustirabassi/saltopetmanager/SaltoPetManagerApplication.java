@@ -1,4 +1,4 @@
-package br.com.saltopetmanager.matheustirabassi.SaltoPetManager;
+package br.com.saltopetmanager.matheustirabassi.saltopetmanager;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -9,14 +9,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.BatherGroomer;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Login;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Scheduling;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain.Tutor;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.BatherGroomerRepository;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.LoginRepository;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.SchedulingRepository;
-import br.com.saltopetmanager.matheustirabassi.SaltoPetManager.repositories.TutorRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.BatherGroomer;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Login;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Scheduling;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Tutor;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.BatherGroomerRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.LoginRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.SchedulingRepository;
+import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.TutorRepository;
 
 @SpringBootApplication
 public class SaltoPetManagerApplication implements CommandLineRunner {
@@ -38,10 +38,13 @@ public class SaltoPetManagerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("test");
+		Login login1 = new Login(null, "admin", "123");
+		Login login2 = new Login(null, "user", "12345");
+		loginRepository.saveAll(Arrays.asList(login1, login2));
+		
 		BatherGroomer batherGroomer1 = new BatherGroomer(Long.parseLong("43464837394"), "Suellem Peçanha Morais",
 				"suellem.morais@geradornv.com.br", sdf.parse("22/02/1986"), "F");
-		batherGroomer1.getCellphones().addAll(Arrays.asList("(88) 97928-8376", "(85) 2404-8282"));
+		batherGroomer1.getCellphones().addAll(Arrays.asList("(88) 97928-8376", "159974244"));
 
 		batherGroomerRepository.save(batherGroomer1);
 
@@ -49,15 +52,12 @@ public class SaltoPetManagerApplication implements CommandLineRunner {
 				sdf.parse("16/04/2000"), "M");
 		Tutor tutor2 = new Tutor(Long.parseLong("79268354209"), "Honoria Spilman Barbosa", "HonoriaSpilman@gmail.com",
 				sdf.parse("31/10/1984"), "F");
-		tutor1.getCellphones().addAll(Arrays.asList("15991246121", "96989244225"));
-		tutor2.getCellphones().addAll(Arrays.asList("(96) 98924-4225", "(96) 3379-2631"));
+		tutor2.getCellphones().addAll(Arrays.asList("159915123", "151233"));
+		tutor1.setLogin(login1);
+		tutor2.setLogin(login2);
 		tutorRepository.saveAll(Arrays.asList(tutor1, tutor2));
 
-		Login login1 = new Login(null, "admin", "123");
-		Login login2 = new Login(null, "user", "12345");
-		login1.setTutor(tutor1);
-		login2.setTutor(tutor2);
-		loginRepository.saveAll(Arrays.asList(login1, login2));
+		
 
 		Scheduling scheduling1 = new Scheduling(null, new Date(), "Importante");
 		batherGroomer1.getCustomerServices().add(scheduling1);

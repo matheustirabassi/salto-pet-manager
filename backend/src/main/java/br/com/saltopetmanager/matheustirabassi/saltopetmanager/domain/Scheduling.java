@@ -1,4 +1,4 @@
-package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain;
+package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,14 +24,14 @@ public class Scheduling implements Serializable {
 	private Date dateTimeSheduled;
 	private String observation;
 
-	@JsonManagedReference
+	
 	@ManyToOne
-	@JoinColumn(name = "tutorId")
+	@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
 
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "batherGroomerId")
+	@JoinColumn(name = "bathergroomer_id")
 	private BatherGroomer batherGroomer;
 
 	public Scheduling() {

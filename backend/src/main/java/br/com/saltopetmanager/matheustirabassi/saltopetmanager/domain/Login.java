@@ -1,16 +1,14 @@
-package br.com.saltopetmanager.matheustirabassi.SaltoPetManager.domain;
+package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Login implements Serializable {
@@ -20,14 +18,9 @@ public class Login implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	@Column(unique = true)
 	private String user;
 	private String password;
-
-	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name = "tutorId")
-	private Tutor tutor;
 
 	public Login() {
 	}
@@ -60,14 +53,6 @@ public class Login implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Tutor getTutor() {
-		return tutor;
-	}
-
-	public void setTutor(Tutor tutor) {
-		this.tutor = tutor;
 	}
 
 	@Override
