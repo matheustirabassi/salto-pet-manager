@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class Login {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	@Column(unique = true)
-	private String user;
-	private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(unique = true)
+    private String user;
+    private String password;
 }

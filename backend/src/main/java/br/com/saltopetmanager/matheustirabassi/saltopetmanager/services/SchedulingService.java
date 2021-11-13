@@ -12,15 +12,15 @@ import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.Sche
 @Service
 public class SchedulingService {
 
-	@Autowired
-	private SchedulingRepository repo;
+    @Autowired
+    private SchedulingRepository repo;
 
-	public Scheduling find(Integer id) {
-		Optional<Scheduling> obj = repo.findById(id);
-		return obj.orElse(null);
-	}
+    public Scheduling find(Integer id) {
+	Optional<Scheduling> obj = repo.findById(id);
+	return obj.orElse(null);
+    }
 
-	public List<Scheduling> findAll() {
-		return repo.findAll();
-	}
+    public List<Scheduling> findAll() {
+	return repo.findAll();
+    }
 }

@@ -15,19 +15,19 @@ import br.com.saltopetmanager.matheustirabassi.saltopetmanager.services.BatherGr
 @RestController
 @RequestMapping(value = "/bathergroomers")
 public class BatherGroomerResource {
-	@Autowired
-	private BatherGroomerService service;
+    @Autowired
+    private BatherGroomerService service;
 
-	@GetMapping(value = "{id}")
-	public ResponseEntity<BatherGroomer> find(@PathVariable Long id) {
-		BatherGroomer obj = service.find(id);
+    @GetMapping(value = "{id}")
+    public ResponseEntity<BatherGroomer> find(@PathVariable Long id) {
+	BatherGroomer obj = service.find(id);
 
-		return ResponseEntity.ok().body(obj);
-	}
+	return ResponseEntity.ok().body(obj);
+    }
 
-	@GetMapping()
-	public ResponseEntity<List<BatherGroomer>> findAll() {
-		List<BatherGroomer> list = service.findAll();
-		return ResponseEntity.ok().body(list);
-	}
+    @GetMapping()
+    public ResponseEntity<List<BatherGroomer>> findAll() {
+	List<BatherGroomer> list = service.findAll();
+	return ResponseEntity.ok().body(list);
+    }
 }

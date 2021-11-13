@@ -31,31 +31,32 @@ import lombok.NoArgsConstructor;
 @Entity
 @Embeddable
 public class Tutor {
-	@Id
-	@NonNull
-	private Long cpf;
-	private String name;
-	private String email;
-	private Date birthDate;
-	private String gender;
+    @Id
+    @NonNull
+    private Long cpf;
+    private String name;
+    private String email;
+    private Date birthDate;
+    private String gender;
 
-	@ElementCollection
-	@CollectionTable(name = "tutor_cellphone", joinColumns = @JoinColumn(name = "cpf_tutor"))
-	@Fetch(FetchMode.JOIN)
-	private Set<String> cellphones = new HashSet<>();
+    @ElementCollection
+    @CollectionTable(name = "tutor_cellphone", joinColumns = @JoinColumn(name = "cpf_tutor"))
+    @Fetch(FetchMode.JOIN)
+    private Set<String> cellphones = new HashSet<>();
 
-	@OneToOne
-	private Login login;
+    @OneToOne
+    private Login login;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "tutor")
-	private List<Scheduling> schedulings = new ArrayList<>();
-	public Tutor(Long cpf, String name, String email, Date birthDate, String gender) {
-		this.cpf = cpf;
-		this.name = name;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.gender = gender;
-	}
+    @JsonIgnore
+    @OneToMany(mappedBy = "tutor")
+    private List<Scheduling> schedulings = new ArrayList<>();
+
+    public Tutor(Long cpf, String name, String email, Date birthDate, String gender) {
+	this.cpf = cpf;
+	this.name = name;
+	this.email = email;
+	this.birthDate = birthDate;
+	this.gender = gender;
+    }
 
 }

@@ -12,15 +12,15 @@ import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.Bath
 @Service
 public class BatherGroomerService {
 
-	@Autowired
-	private BatherGroomerRepository repo;
+    @Autowired
+    private BatherGroomerRepository repo;
 
-	public BatherGroomer find(Long id) {
-		Optional<BatherGroomer> obj = repo.findById(id);
-		return obj.orElse(null);
-	}
+    public BatherGroomer find(Long id) {
+	Optional<BatherGroomer> obj = repo.findById(id);
+	return obj.orElse(null);
+    }
 
-	public List<BatherGroomer> findAll() {
-		return repo.findAll();
-	}
+    public List<BatherGroomer> findAll() {
+	return repo.findAll();
+    }
 }

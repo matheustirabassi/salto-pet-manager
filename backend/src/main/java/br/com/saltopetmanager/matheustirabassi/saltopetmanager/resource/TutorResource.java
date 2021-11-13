@@ -15,19 +15,19 @@ import br.com.saltopetmanager.matheustirabassi.saltopetmanager.services.TutorSer
 @RestController
 @RequestMapping(value = "/tutors")
 public class TutorResource {
-	@Autowired
-	private TutorService service;
+    @Autowired
+    private TutorService service;
 
-	@GetMapping(value = "{cpf}")
-	public ResponseEntity<Tutor> find(@PathVariable Long cpf) {
-		Tutor obj = service.find(cpf);
+    @GetMapping(value = "{cpf}")
+    public ResponseEntity<Tutor> find(@PathVariable Long cpf) {
+	Tutor obj = service.find(cpf);
 
-		return ResponseEntity.ok().body(obj);
-	}
+	return ResponseEntity.ok().body(obj);
+    }
 
-	@GetMapping
-	public ResponseEntity<List<Tutor>> findAll() {
-		List<Tutor> list = service.findAll();
-		return ResponseEntity.ok().body(list);
-	}
+    @GetMapping
+    public ResponseEntity<List<Tutor>> findAll() {
+	List<Tutor> list = service.findAll();
+	return ResponseEntity.ok().body(list);
+    }
 }
