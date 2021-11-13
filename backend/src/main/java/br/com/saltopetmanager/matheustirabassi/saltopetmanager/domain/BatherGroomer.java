@@ -1,33 +1,35 @@
 package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.aspectj.lang.annotation.Before;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-public class BatherGroomer implements Serializable {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	private static final long serialVersionUID = 1L;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Embeddable
+@Entity
+public class BatherGroomer {
 	@Id
 	@NonNull
 	private Long cpf;
@@ -37,98 +39,19 @@ public class BatherGroomer implements Serializable {
 	private String gender;
 
 	@ElementCollection
-	@CollectionTable(name = "bathergroomer_cellphone" ,
-	        joinColumns = @JoinColumn(name = "cpf_bathergroomer"))
-	@Fetch(FetchMode.JOIN) 
+	@CollectionTable(name = "bathergroomer_cellphone", joinColumns = @JoinColumn(name = "cpf_bathergroomer"))
+	@Fetch(FetchMode.JOIN)
 	private Set<String> cellphones = new HashSet<>();
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "batherGroomer")
 	private List<Scheduling> customerServices = new ArrayList<>();
-	
-	
-	public BatherGroomer() {
-	}
-
 	public BatherGroomer(Long cpf, String name, String email, Date birthDate, String gender) {
 		this.cpf = cpf;
 		this.name = name;
 		this.email = email;
 		this.birthDate = birthDate;
 		this.gender = gender;
-	}
-
-	public Long getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(Long cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Set<String> getCellphones() {
-		return cellphones;
-	}
-
-	public void setCellphones(Set<String> cellphones) {
-		this.cellphones = cellphones;
-	}
-
-	public List<Scheduling> getCustomerServices() {
-		return customerServices;
-	}
-
-	public void setCustomerServices(List<Scheduling> customerServices) {
-		this.customerServices = customerServices;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BatherGroomer other = (BatherGroomer) obj;
-		return Objects.equals(cpf, other.cpf);
 	}
 
 }
