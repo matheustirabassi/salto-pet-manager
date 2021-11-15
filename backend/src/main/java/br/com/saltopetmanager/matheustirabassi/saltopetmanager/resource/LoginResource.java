@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j2;
 public class LoginResource {
     @Autowired
     private LoginService service;
-    private Login login;
+    
 
     @GetMapping(value = "{id}")
     public ResponseEntity<Login> find(@PathVariable String id) {
@@ -67,7 +67,6 @@ public class LoginResource {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	return encoder;
+	return new BCryptPasswordEncoder();
     }
 }
