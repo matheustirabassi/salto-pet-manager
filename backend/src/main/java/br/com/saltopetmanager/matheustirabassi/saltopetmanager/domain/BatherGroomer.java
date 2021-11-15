@@ -30,29 +30,29 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @Entity
 public class BatherGroomer {
-    @Id
-    @NonNull
-    private Long cpf;
-    private String name;
-    private String email;
-    private Date birthDate;
-    private String gender;
+	@Id
+	@NonNull
+	private Long cpf;
+	private String name;
+	private String email;
+	private Date birthDate;
+	private String gender;
 
-    @ElementCollection
-    @CollectionTable(name = "bathergroomer_cellphone", joinColumns = @JoinColumn(name = "cpf_bathergroomer"))
-    @Fetch(FetchMode.JOIN)
-    private Set<String> cellphones = new HashSet<>();
+	@ElementCollection
+	@CollectionTable(name = "bathergroomer_cellphone", joinColumns = @JoinColumn(name = "cpf_bathergroomer"))
+	@Fetch(FetchMode.JOIN)
+	private Set<String> cellphones = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "batherGroomer")
-    private final List<Scheduling> customerServices = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "batherGroomer")
+	private final List<Scheduling> customerServices = new ArrayList<>();
 
-    public BatherGroomer(Long cpf, String name, String email, Date birthDate, String gender) {
-	this.cpf = cpf;
-	this.name = name;
-	this.email = email;
-	this.birthDate = birthDate;
-	this.gender = gender;
-    }
+	public BatherGroomer(Long cpf, String name, String email, Date birthDate, String gender) {
+		this.cpf = cpf;
+		this.name = name;
+		this.email = email;
+		this.birthDate = birthDate;
+		this.gender = gender;
+	}
 
 }

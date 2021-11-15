@@ -27,8 +27,7 @@ import lombok.extern.log4j.Log4j2;
 public class LoginResource {
     @Autowired
     private LoginService service;
-    
-
+  
     @GetMapping(value = "{id}")
     public ResponseEntity<Login> find(@PathVariable String id) {
 	Login obj = service.findByLogin(id);

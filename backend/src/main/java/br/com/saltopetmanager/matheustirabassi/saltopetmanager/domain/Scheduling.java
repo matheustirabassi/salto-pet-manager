@@ -2,6 +2,7 @@ package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,24 +24,28 @@ import lombok.NoArgsConstructor;
 @Entity
 @Embeddable
 public class Scheduling {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Date dateTimeSheduled;
-    private String observation;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "tutor_id")
-    private Tutor tutor;
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
+	private Date dateTimeSheduled;
+	private String observation;
 
-    @ManyToOne
-    @JoinColumn(name = "bathergroomer_id")
-    private BatherGroomer batherGroomer;
+	@ManyToOne
+	@JoinColumn(name = "tutor_id")
+	private Tutor tutor;
 
-    public Scheduling(Integer id, Date dateTimeSheduled, String observation) {
-	this.id = id;
-	this.dateTimeSheduled = dateTimeSheduled;
-	this.observation = observation;
-    }
+	@ManyToOne
+	@JoinColumn(name = "bathergroomer_id")
+	private BatherGroomer batherGroomer;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "scheduling")
+	private Payment payment;
+
+	public Scheduling(Integer id, Date dateTimeSheduled, String observation) {
+		this.id = id;
+		this.dateTimeSheduled = dateTimeSheduled;
+		this.observation = observation;
+	}
 
 }
