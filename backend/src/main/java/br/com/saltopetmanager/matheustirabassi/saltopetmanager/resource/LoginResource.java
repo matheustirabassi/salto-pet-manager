@@ -25,47 +25,47 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequestMapping(value = "/logins")
 public class LoginResource {
-    @Autowired
-    private LoginService service;
-  
-    @GetMapping(value = "{id}")
-    public ResponseEntity<Login> find(@PathVariable String id) {
-	Login obj = service.findByLogin(id);
+	@Autowired
+	private LoginService service;
 
-	return ResponseEntity.ok().body(obj);
-    }
+	@GetMapping(value = "{id}")
+	public ResponseEntity<Login> findById(@PathVariable Integer id) {
+		Login obj = service.findById(id);
 
-    @GetMapping
-    public ResponseEntity<List<Login>> findAll() {
-	List<Login> list = service.findAll();
-	return ResponseEntity.ok().body(list);
-    }
+		return ResponseEntity.ok().body(obj);
+	}
 
-    @PostMapping
-    public ResponseEntity<Login> insert(@RequestBody Login obj) {
-	obj.setPassword(getPasswordEncoder().encode(obj.getPassword()));
-	obj = service.save(obj);
-	return ResponseEntity.ok(obj);
-    }
+	@GetMapping
+	public ResponseEntity<List<Login>> findAll() {
+		List<Login> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
 
-    @GetMapping("/passwordValidate")
-    public ResponseEntity<Boolean> passwordValidate(@RequestParam String user, @RequestParam String password){
+	@PostMapping
+	public ResponseEntity<Login> insert(@RequestBody Login obj) {
+		obj.setPassword(getPasswordEncoder().encode(obj.getPassword()));
+		obj = service.save(obj);
+		return ResponseEntity.ok(obj);
+	}
 
-        Optional <Login> obj = Optional.ofNullable(service.findByLogin(user));
-        if(obj.isEmpty()){
-            log.error("User UNAUTHORIZED!!!");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
-        }
-        boolean valid = false;
-        valid = getPasswordEncoder().matches(password, obj.get().getPassword());
+	@GetMapping("/passwordValidate")
+	public ResponseEntity<Boolean> passwordValidate(@RequestParam String user, @RequestParam String password) {
 
-	    HttpStatus status = (valid) ? HttpStatus.OK: HttpStatus.UNAUTHORIZED;
-        return ResponseEntity.status(status).body(valid);
+		Optional<Login> obj = Optional.ofNullable(service.findByLogin(user));
+		if (obj.isEmpty()) {
+			log.error("User UNAUTHORIZED!!!");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+		}
+		boolean valid = false;
+		valid = getPasswordEncoder().matches(password, obj.get().getPassword());
 
-    }
+		HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+		return ResponseEntity.status(status).body(valid);
 
-    @Bean
-    public PasswordEncoder getPasswordEncoder() {
-	return new BCryptPasswordEncoder();
-    }
+	}
+
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

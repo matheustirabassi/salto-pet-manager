@@ -1,27 +1,28 @@
 package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 
-import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.enums.PaymentStatus;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
-@Embeddable
-public class CardPayment extends Payment {
+public class CardPayment extends Payment implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer installmentsNumber;
 
-	public CardPayment(Integer id, PaymentStatus status, Integer installmentsNumber) {
+	public CardPayment(Integer id, Integer status, Integer installmentsNumber) {
 		super(id, status);
 		this.installmentsNumber = installmentsNumber;
 	}
 
-	public Integer getInstallmentsNumber() {
-		return installmentsNumber;
-	}
-
-	public void setInstallmentsNumber(Integer installmentsNumber) {
-		this.installmentsNumber = installmentsNumber;
+	public CardPayment(Integer id, Integer status) {
+		super(id, status);
 	}
 
 }

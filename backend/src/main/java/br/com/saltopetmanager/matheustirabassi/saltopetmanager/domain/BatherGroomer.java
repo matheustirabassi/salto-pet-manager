@@ -1,5 +1,6 @@
 package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,7 +9,6 @@ import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,9 +27,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 @Entity
-public class BatherGroomer {
+public class BatherGroomer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@NonNull
 	private Long cpf;
@@ -37,7 +38,10 @@ public class BatherGroomer {
 	private String email;
 	private Date birthDate;
 	private String gender;
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "batherGroomer")
+	private List<Address> addresses = new ArrayList<>();
+	
 	@ElementCollection
 	@CollectionTable(name = "bathergroomer_cellphone", joinColumns = @JoinColumn(name = "cpf_bathergroomer"))
 	@Fetch(FetchMode.JOIN)

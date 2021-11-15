@@ -1,43 +1,50 @@
 package br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.enums.PaymentStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
-@Embeddable
-@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
-public abstract class Payment {
+public abstract class Payment implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Integer id;
 	private Integer status;
-	@OneToOne
-	@MapsId
-	private Scheduling scheduling;
 
-	protected Payment(Integer id, PaymentStatus status) {
+	protected Payment(Integer id, Integer status) {
 		super();
 		this.id = id;
-		this.status = status.getId();
+		this.status = status;
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public PaymentStatus getStatus() {
 		return PaymentStatus.toEnum(status);
 	}
 
-	public void setEstado(PaymentStatus status) {
+	public void setStatus(PaymentStatus status) {
 		this.status = status.getId();
 	}
 

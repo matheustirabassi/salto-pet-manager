@@ -15,19 +15,19 @@ import br.com.saltopetmanager.matheustirabassi.saltopetmanager.services.Scheduli
 @RestController
 @RequestMapping(value = "/schedulings")
 public class ShedulingResource {
-    @Autowired
-    private SchedulingService service;
+	@Autowired
+	private SchedulingService service;
 
-    @GetMapping(value = "{id}")
-    public ResponseEntity<Scheduling> find(@PathVariable Integer id) {
-	Scheduling obj = service.find(id);
+	@GetMapping(value = "{id}")
+	public ResponseEntity<Scheduling> find(@PathVariable Integer id) {
+		Scheduling obj = service.find(id);
 
-	return ResponseEntity.ok().body(obj);
-    }
+		return ResponseEntity.ok().body(obj);
+	}
 
-    @GetMapping
-    public ResponseEntity<List<Scheduling>> findAll() {
-	List<Scheduling> list = service.findAll();
-	return ResponseEntity.ok().body(list);
-    }
+	@GetMapping
+	public ResponseEntity<List<Scheduling>> findAll() {
+		List<Scheduling> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
 }
