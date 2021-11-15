@@ -10,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.BatherGroomer;
-import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Login;
 import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Scheduling;
 import br.com.saltopetmanager.matheustirabassi.saltopetmanager.domain.Tutor;
 import br.com.saltopetmanager.matheustirabassi.saltopetmanager.repositories.BatherGroomerRepository;
