@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +25,7 @@ public class Address {
 	private String complement;
 	private String district;
 	private String cep;
+	@OneToOne
+	private City city;
 
 }
