@@ -32,7 +32,7 @@ public class Scheduling implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date dateTimeSheduled;
 	private String observation;
-	@JsonIgnore
+
 	@ManyToOne
 	@JoinColumn(name = "tutor_id")
 	private Tutor tutor;
@@ -41,7 +41,7 @@ public class Scheduling implements Serializable {
 	@JoinColumn(name = "bathergroomer_id")
 	private BatherGroomer batherGroomer;
 
-	@OneToOne()
+	@OneToOne
 	private Payment payment;
 
 	public Scheduling(Integer id, Date dateTimeSheduled, String observation) {

@@ -75,8 +75,6 @@ public class SaltoPetManagerApplication implements CommandLineRunner {
 		Address a2 = new Address(null, "Avenida Matos", "105", "Sala 800", "Centro", "18520-000");
 		a1.setCity(c1);
 		a2.setCity(c2);
-		a1.setTutor(t1);
-		a2.setTutor(t1);
 		t1.getAddresses().addAll(Arrays.asList(a1, a2));
 
 		tutorRepository.saveAll(Arrays.asList(t1));
@@ -84,7 +82,7 @@ public class SaltoPetManagerApplication implements CommandLineRunner {
 
 		Scheduling scheduling1 = new Scheduling(null, new Date(), "Importante");
 		batherGroomer1.getCustomerServices().add(scheduling1);
-		t1.getSchedulings().add(scheduling1);
+		t1.getSchedules().add(scheduling1);
 		scheduling1.setTutor(t1);
 		scheduling1.setBatherGroomer(batherGroomer1);
 
